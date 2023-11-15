@@ -81,6 +81,14 @@ fn main() {
         let f2 = moved_owner_and_returned_borrow(&f4);
         println!("f2 revived again as '{}' and f4 is '{}' bc of mut", f2, f4);
     }
+    //tuple part of 4.1 - 4.2
+    {
+        let s1 = String::from("hello");
+
+        let (s2, len) = calculate_length(s1);
+
+        println!("The length of '{}' is {}.", s2, len);
+    }
 
     
 }
@@ -101,4 +109,10 @@ fn moved_owner_and_returned(a_string: String)->String{
 fn moved_owner_and_returned_borrow(a_string: &String)->&String{
     println!("In this function the ownership of '{}' was borrowed", a_string);
     return a_string;
+}
+
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len(); // len() returns the length of a String
+
+    (s, length)
 }
