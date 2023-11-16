@@ -1,5 +1,12 @@
 fn main() {
 
+    ch4_1();
+    ch4_2();
+    ch4_3();
+    
+}
+
+fn ch4_1(){
     let s = "hello";
     println!("{s}");
 
@@ -89,6 +96,9 @@ fn main() {
 
         println!("The length of '{}' is {}.", s2, len);
     }
+}
+
+fn ch4_2(){
     //tuple using reference
     {
         let s1 = String::from("Otter");
@@ -150,8 +160,10 @@ fn main() {
         println!("{reference_to_nothing_no_dangle}");
 
     }
+}
 
-    
+fn ch4_3(){
+    println!("Start of chapter 4.3 The Slice Type");
 }
 
 fn moved_owner(a_string: String){
@@ -200,3 +212,7 @@ fn no_dangle() -> String {
 
     s
 }
+
+// fn the_slice_type(){
+    
+// }
