@@ -89,6 +89,67 @@ fn main() {
 
         println!("The length of '{}' is {}.", s2, len);
     }
+    //tuple using reference
+    {
+        let s1 = String::from("Otter");
+        let len = calculate_length_ref(&s1);
+        println!("The length of '{}' is '{}'", s1, len);
+    }
+    //attempting to change a string using reference and borrow
+    {
+        let mut s = String::from("Beluga");
+        println!("s = '{}' before change", s);
+        //change(&s);
+        change_mut(&mut s);
+        println!("s = '{}' after change", s);
+    }
+    //attempt to mutiple values of same reference
+    {
+        let mut s = String::from("hello");
+
+        let r1 = &mut s;
+        println!("{r1}");
+        let r2 = &mut s;
+        println!("{r2}");
+        //println!("{}, {}", r1, r2);
+        //this wont work even after both r1 and r2 printed, would need {} for scope
+        //println!("{r1}");
+    }
+    //mut and imut ex
+    /* 
+    {
+        let mut s = String::from("hello");
+
+        let r1 = &s; // no problem
+        let r2 = &s; // no problem
+        let r3 = &mut s; // BIG PROBLEM
+
+        println!("{}, {}, and {}", r1, r2, r3);
+       
+    }
+    */
+    //example where above works, but only bc of scope
+    {
+        let mut s = String::from("shark");
+
+        let r1 = &s; // no problem
+        let r2 = &s; // no problem
+        println!("{} and {}", r1, r2);
+        // variables r1 and r2 will not be used after this point
+
+        let r3 = &mut s; // no problem
+        r3.push_str(" spirit");
+        println!("{}", r3);
+        println!("{}", s);
+
+    }
+    //dangling pointer
+    {
+    //     let reference_to_nothing = dangle();
+        let reference_to_nothing_no_dangle = no_dangle();
+        println!("{reference_to_nothing_no_dangle}");
+
+    }
 
     
 }
@@ -115,4 +176,27 @@ fn calculate_length(s: String) -> (String, usize) {
     let length = s.len(); // len() returns the length of a String
 
     (s, length)
+}
+
+fn calculate_length_ref(s: &String)->usize{
+    s.len()
+}
+//this wont work bc the string is behind a reference so it cannot be mut unless..
+// fn change(some_string: &String) {
+//     some_string.push_str(", world");
+// }
+
+fn change_mut(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+
+// fn dangle() -> &String {
+//     let s = String::from("hello");
+
+//     &s
+// }
+fn no_dangle() -> String {
+    let s = String::from("snek");
+
+    s
 }
