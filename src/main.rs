@@ -3,7 +3,7 @@ fn main() {
     ch4_1();
     ch4_2();
     ch4_3();
-    
+
 }
 
 fn ch4_1(){
@@ -164,6 +164,7 @@ fn ch4_2(){
 
 fn ch4_3(){
     println!("Start of chapter 4.3 The Slice Type");
+
 }
 
 fn moved_owner(a_string: String){
@@ -211,6 +212,18 @@ fn no_dangle() -> String {
     let s = String::from("snek");
 
     s
+}
+
+fn first_word(s: &String) -> usize {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    s.len()
 }
 
 // fn the_slice_type(){
